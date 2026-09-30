@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { SYMBOLS, type Exercise } from '../game'
 import type { Strings } from '../i18n'
+import { LOOKS, type Theme } from '../theme'
 
 type Props = {
   t: Strings
@@ -8,11 +9,14 @@ type Props = {
   index: number
   total: number
   correctCount: number
+  lastWasCorrect: boolean
+  theme: Theme
   onAnswer: (given: string) => void
   onQuit: () => void
 }
 
-export function RaceScreen({ t, exercise, index, total, correctCount, onAnswer, onQuit }: Props) {
+export function RaceScreen({ t, exercise, index, total, correctCount, lastWasCorrect, theme, onAnswer, onQuit }: Props) {
+  const look = LOOKS[theme]
   const [given, setGiven] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -33,8 +37,17 @@ export function RaceScreen({ t, exercise, index, total, correctCount, onAnswer, 
         <span>{t.correctSoFar(correctCount)}</span>
       </div>
       <div className="progress-track" aria-hidden="true">
-        <span style={{ width: `${(index / total) * 100}%` }} />
+        <span className="progress-fill" style={{ width: `${(index / total) * 100}%` }} />
+        <span className="progress-runner" style={{ left: `${(index / total) * 100}%` }}>
+          {look.runner}
+        </span>
+        <span className="progress-goal">{look.goal}</span>
       </div>
+      {lastWasCorrect && (
+        <span className="correct-pop" aria-hidden="true">
+          {look.correct}
+        </span>
+      )}
       <form
         className="answer-form"
         onSubmit={(event) => {

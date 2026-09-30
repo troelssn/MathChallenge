@@ -11,10 +11,13 @@ Ideas for later. Suggestions sent from the app arrive as GitHub issues labelled 
 - [ ] Difficulty that adapts: show problems you often get wrong more often
 
 ## Motivation
-- [ ] Player profiles so siblings can keep separate records
-- [ ] Stars, badges and streaks
+- [ ] Player profiles so siblings can keep separate records, each with their own theme
+- [ ] Stars, badges and streaks (e.g. unicorn stickers, football trophies)
 - [ ] Progress over time chart
-- [ ] Sound effects and a small celebration animation on correct answers
+- [ ] Sound effects (a neigh/sparkle for unicorn, crowd cheer for football)
+- [x] Themes: unicorn and football, with celebration confetti on the results screen
+- [ ] More themes: dinosaurs, space, horses, cars
+- [ ] Football theme: pick your team colours / favourite club
 - [ ] Visual aid for multiplication (dot grid, like GangeRace)
 
 ## Usability

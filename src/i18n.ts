@@ -1,9 +1,29 @@
 import type { Operation } from './game'
+import type { Theme } from './theme'
 
 export type Language = 'da' | 'en'
 
+type ThemeText = { tagline: string; wellDone: string; newRecord: string; perfect: string }
+
 const da = {
-  tagline: 'Regn hurtigt. Regn rigtigt.',
+  themed: {
+    unicorn: {
+      tagline: 'Regn dig gennem regnbuen!',
+      wellDone: 'Magisk regnet!',
+      newRecord: 'Ny magisk rekord!',
+      perfect: 'Fejlfrit! Du er en ægte regne-enhjørning.',
+    },
+    football: {
+      tagline: 'Scor mål med matematik!',
+      wellDone: 'Flot kamp!',
+      newRecord: 'Ny rekord – MÅÅÅL!',
+      perfect: 'Fejlfrit! Hattrick på hattrick.',
+    },
+  } as Record<Theme, ThemeText>,
+  themeNames: { unicorn: 'Enhjørning', football: 'Fodbold' } as Record<Theme, string>,
+  chooseTheme: 'Vælg dit tema',
+  chooseThemeIntro: 'Du kan altid skifte tema med knappen øverst.',
+  switchTheme: (name: string) => `Skift tema til ${name}`,
   intro: 'Vælg regnearter og sværhedsgrad, og løs regnestykkerne så hurtigt du kan.',
   operationsLabel: 'Regnearter',
   operations: { add: 'Plus', subtract: 'Minus', multiply: 'Gange', divide: 'Division' } as Record<Operation, string>,
@@ -20,8 +40,6 @@ const da = {
   next: 'Næste',
   quit: 'Stop',
   finished: 'Færdig!',
-  wellDone: 'Godt regnet.',
-  newRecord: 'Ny rekord!',
   time: 'Tid',
   correct: 'Rigtige',
   accuracy: 'Præcision',
@@ -32,7 +50,6 @@ const da = {
   mistakes: 'Dine fejl',
   youAnswered: 'Dit svar',
   noAnswer: 'intet svar',
-  perfect: 'Fejlfrit! Alle svar var rigtige.',
   practiceMistakes: 'Øv fejlene',
   tryAgain: 'Prøv igen',
   changeSettings: 'Skift indstillinger',
@@ -49,7 +66,24 @@ const da = {
 export type Strings = typeof da
 
 const en: Strings = {
-  tagline: 'Calculate fast. Calculate right.',
+  themed: {
+    unicorn: {
+      tagline: 'Calculate your way across the rainbow!',
+      wellDone: 'Magical math!',
+      newRecord: 'New magical record!',
+      perfect: 'Perfect! You are a true math unicorn.',
+    },
+    football: {
+      tagline: 'Score goals with math!',
+      wellDone: 'Great match!',
+      newRecord: 'New record – GOOOAL!',
+      perfect: 'Perfect! Hat-trick after hat-trick.',
+    },
+  },
+  themeNames: { unicorn: 'Unicorn', football: 'Football' },
+  chooseTheme: 'Pick your theme',
+  chooseThemeIntro: 'You can switch theme any time with the button at the top.',
+  switchTheme: (name) => `Switch theme to ${name}`,
   intro: 'Pick the operations and difficulty, then solve the problems as fast as you can.',
   operationsLabel: 'Operations',
   operations: { add: 'Plus', subtract: 'Minus', multiply: 'Times', divide: 'Division' },
@@ -66,8 +100,6 @@ const en: Strings = {
   next: 'Next',
   quit: 'Quit',
   finished: 'Finished!',
-  wellDone: 'Nicely done.',
-  newRecord: 'New record!',
   time: 'Time',
   correct: 'Correct',
   accuracy: 'Accuracy',
@@ -78,7 +110,6 @@ const en: Strings = {
   mistakes: 'Your mistakes',
   youAnswered: 'Your answer',
   noAnswer: 'no answer',
-  perfect: 'Perfect! Every answer was right.',
   practiceMistakes: 'Practice mistakes',
   tryAgain: 'Try again',
   changeSettings: 'Change settings',
