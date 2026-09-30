@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { formatTime, OPERATIONS, SYMBOLS, type Operation, type Settings } from '../game'
 import type { Strings } from '../i18n'
+import { LOOKS, type Theme } from '../theme'
 
 type Props = {
   t: Strings
+  theme: Theme
   initial: Settings
   bestTimeFor: (settings: Settings) => number | null
   onStart: (settings: Settings) => void
@@ -13,7 +15,7 @@ const ADD_SUBTRACT_OPTIONS = [10, 20, 50, 100]
 const TABLE_OPTIONS = [5, 10, 12]
 const COUNT_OPTIONS = [10, 20, 30, 50]
 
-export function SetupScreen({ t, initial, bestTimeFor, onStart }: Props) {
+export function SetupScreen({ t, theme, initial, bestTimeFor, onStart }: Props) {
   const [settings, setSettings] = useState(initial)
   const hasAddSubtract = settings.operations.some((operation) => operation === 'add' || operation === 'subtract')
   const hasMultiplyDivide = settings.operations.some((operation) => operation === 'multiply' || operation === 'divide')
@@ -36,7 +38,12 @@ export function SetupScreen({ t, initial, bestTimeFor, onStart }: Props) {
         if (settings.operations.length) onStart(settings)
       }}
     >
-      <h1>{t.tagline}</h1>
+      <div className="setup-hero">
+        <span className="setup-mascot" aria-hidden="true">
+          {LOOKS[theme].mascot}
+        </span>
+        <h1>{t.themed[theme].tagline}</h1>
+      </div>
       <p className="muted">{t.intro}</p>
 
       <fieldset>

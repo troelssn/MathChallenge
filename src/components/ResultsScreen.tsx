@@ -1,8 +1,11 @@
 import { formatTime, operationStats, SYMBOLS, type Exercise } from '../game'
 import type { Strings } from '../i18n'
+import { LOOKS, type Theme } from '../theme'
+import { Confetti } from './Confetti'
 
 type Props = {
   t: Strings
+  theme: Theme
   exercises: Exercise[]
   seconds: number
   isRecord: boolean
@@ -11,7 +14,8 @@ type Props = {
   onChangeSettings: () => void
 }
 
-export function ResultsScreen({ t, exercises, seconds, isRecord, onPracticeMistakes, onTryAgain, onChangeSettings }: Props) {
+export function ResultsScreen({ t, theme, exercises, seconds, isRecord, onPracticeMistakes, onTryAgain, onChangeSettings }: Props) {
+  const themed = t.themed[theme]
   const correct = exercises.filter(({ isCorrect }) => isCorrect).length
   const mistakes = exercises.filter(({ isCorrect }) => isCorrect === false)
   const accuracy = exercises.length ? Math.round((correct / exercises.length) * 100) : 0
@@ -20,8 +24,14 @@ export function ResultsScreen({ t, exercises, seconds, isRecord, onPracticeMista
 
   return (
     <section className="card results" aria-labelledby="results-title">
+      <Confetti emojis={LOOKS[theme].confetti} />
       <p className="eyebrow">{t.finished}</p>
-      <h1 id="results-title">{isRecord ? `🏆 ${t.newRecord}` : t.wellDone}</h1>
+      <h1 id="results-title">
+        <span className="results-mascot" aria-hidden="true">
+          {isRecord ? '🏆' : LOOKS[theme].mascot}
+        </span>{' '}
+        {isRecord ? themed.newRecord : themed.wellDone}
+      </h1>
 
       <div className="score-grid">
         <Score value={formatTime(seconds)} label={t.time} />
@@ -59,7 +69,7 @@ export function ResultsScreen({ t, exercises, seconds, isRecord, onPracticeMista
           ))}
         </div>
       ) : (
-        <p className="perfect">{t.perfect}</p>
+        <p className="perfect">{themed.perfect}</p>
       )}
 
       <div className="result-actions">

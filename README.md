@@ -10,6 +10,7 @@ Et regnespil på tid for børn (og voksne): plus, minus, gange og division. Insp
 - Svaret godkendes automatisk, så snart det er rigtigt. Tryk Enter eller *Næste* for at gå videre med et forkert svar.
 - Resultatet viser tid, præcision, fejl fordelt på regnearter, og du kan øve dine fejl bagefter.
 - Rekorder gemmes lokalt i browseren pr. indstilling (kun fejlfrie runder tæller).
+- Vælg tema første gang: 🦄 enhjørning eller ⚽ fodbold. Skift tema når som helst med knappen øverst.
 - Skift mellem dansk og engelsk øverst til højre.
 - Forslag sendes via knappen 💡, som åbner et GitHub-issue med labelen `suggestion`.
 

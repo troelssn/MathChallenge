@@ -14,31 +14,80 @@
   --good: #0f9d58;
   --bad: #c62828;
   --shadow: 0 10px 30px rgb(60 40 160 / 0.1);
+  /* Theme hooks: page background, header text, fonts, button fill, progress bar. */
+  --page-bg: var(--bg);
+  --topbar-text: var(--text);
+  --heading-font: inherit;
+  --primary-fill: var(--primary);
+  --progress-fill: var(--primary);
+  --progress-track: var(--primary-soft);
+  --card-border: 1px solid var(--border);
   color-scheme: light;
-  font-family: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-family: 'Fredoka', 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
   color: var(--text);
-  background: var(--bg);
+  /* On the root, not body, so the decorations in body::before paint above it. */
+  background: var(--page-bg);
+  background-attachment: fixed;
+  min-height: 100%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #141226;
-    --surface: #1f1c38;
-    --text: #f1eeff;
-    --muted: #a9a3cc;
-    --border: #36315c;
-    --primary: #8b73ff;
-    --primary-text: #120e2b;
-    --primary-soft: #2c2654;
-    --add: #4cc98a;
-    --subtract: #ffa24d;
-    --multiply: #a18fff;
-    --divide: #ff6fa8;
-    --good: #4cc98a;
-    --bad: #ff7a7a;
-    --shadow: 0 10px 30px rgb(0 0 0 / 0.35);
-    color-scheme: dark;
-  }
+/* Unicorn: pastel sky, rainbow, sparkles. */
+:root[data-theme='unicorn'] {
+  --bg: #fff5fb;
+  --surface: #ffffff;
+  --text: #4a2a6b;
+  --muted: #8a6aa6;
+  --border: #f6cde8;
+  --primary: #e0439a;
+  --primary-text: #ffffff;
+  --primary-soft: #ffe6f4;
+  --add: #16a394;
+  --subtract: #f57c1f;
+  --multiply: #9352f2;
+  --divide: #e0439a;
+  --good: #16a394;
+  --bad: #d6336c;
+  --shadow: 0 14px 36px rgb(224 67 154 / 0.18);
+  --page-bg:
+    radial-gradient(circle at 12% 18%, #fff 0 2px, transparent 3px),
+    radial-gradient(circle at 82% 12%, #fff 0 3px, transparent 4px),
+    radial-gradient(circle at 70% 42%, #fff 0 2px, transparent 3px),
+    radial-gradient(circle at 25% 65%, #fff 0 3px, transparent 4px),
+    radial-gradient(circle at 90% 78%, #fff 0 2px, transparent 3px),
+    linear-gradient(160deg, #ffd9ee 0%, #eadcff 48%, #d7efff 100%);
+  --topbar-text: #4a2a6b;
+  --heading-font: 'Fredoka', sans-serif;
+  --primary-fill: linear-gradient(135deg, #ff5fae, #a45cff);
+  --progress-fill: linear-gradient(90deg, #ff7eb9, #ffb86b, #ffe66b, #7ee0a1, #72c7ff, #b18cff);
+  --progress-track: #f3e8ff;
+  --card-border: 3px solid #ffd0ea;
+}
+
+/* Football: striped grass, pitch lines, red/white like a Danish jersey. */
+:root[data-theme='football'] {
+  --bg: #f1f8f2;
+  --surface: #ffffff;
+  --text: #13261a;
+  --muted: #4d6655;
+  --border: #cfe3d4;
+  --primary: #d62828;
+  --primary-text: #ffffff;
+  --primary-soft: #ffe3e3;
+  --add: #2b8a3e;
+  --subtract: #e67700;
+  --multiply: #1864ab;
+  --divide: #d62828;
+  --good: #2b8a3e;
+  --bad: #d62828;
+  --shadow: 0 14px 36px rgb(0 40 10 / 0.35);
+  --page-bg: repeating-linear-gradient(180deg, #2f9e44 0 90px, #37b24d 90px 180px);
+  --topbar-text: #ffffff;
+  --heading-font: 'Rubik', sans-serif;
+  --primary-fill: #d62828;
+  --progress-fill: transparent;
+  --progress-track: linear-gradient(90deg, transparent calc(50% - 1px), #fff calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)), #37b24d;
+  --card-border: 4px solid #13261a;
+  font-family: 'Rubik', system-ui, sans-serif;
 }
 
 * {
@@ -48,7 +97,40 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--bg);
+}
+
+/* Big faint rainbow behind the unicorn theme. */
+:root[data-theme='unicorn'] body::before {
+  content: '';
+  position: fixed;
+  inset: auto 0 0;
+  height: 60vh;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.45;
+  background: radial-gradient(
+    circle at 50% 120%,
+    transparent 40%,
+    #ff9ecf 40% 43%,
+    #ffc58f 43% 46%,
+    #fff08f 46% 49%,
+    #a8f0b8 49% 52%,
+    #9fd8ff 52% 55%,
+    #c9a8ff 55% 58%,
+    transparent 58%
+  );
+}
+
+/* Centre circle and halfway line behind the football theme. */
+:root[data-theme='football'] body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 50%, transparent 0 150px, rgb(255 255 255 / 0.55) 150px 154px, transparent 154px),
+    linear-gradient(180deg, transparent calc(50% - 2px), rgb(255 255 255 / 0.55) calc(50% - 2px) calc(50% + 2px), transparent calc(50% + 2px));
 }
 
 button,
@@ -76,6 +158,13 @@ h1,
 h2 {
   margin: 0;
   line-height: 1.2;
+  font-family: var(--heading-font);
+}
+
+:root[data-theme='football'] h1 {
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: 0.02em;
 }
 
 h1 {
@@ -135,23 +224,36 @@ h2 {
   padding: 0;
   font-size: 1.15rem;
   font-weight: 800;
+  font-family: var(--heading-font);
+  color: var(--topbar-text);
 }
 
 .brand-mark {
   display: grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
-  background: var(--primary);
-  color: var(--primary-text);
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--primary);
+  font-size: 1.3rem;
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 400px) {
+  .brand-name {
+    display: none;
+  }
 }
 
 .timer {
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
   font-weight: 700;
-  color: var(--muted);
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 4px 10px;
 }
 
 .topbar-actions {
@@ -172,11 +274,40 @@ h2 {
 .card {
   display: grid;
   gap: 20px;
+  position: relative;
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 24px;
+  border: var(--card-border);
+  border-radius: 28px;
   padding: clamp(20px, 5vw, 32px);
   box-shadow: var(--shadow);
+}
+
+.setup-hero {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.setup-mascot,
+.results-mascot {
+  display: inline-block;
+  font-size: 3rem;
+  line-height: 1;
+  animation: bob 2.4s ease-in-out infinite;
+}
+
+.results-mascot {
+  font-size: 1em;
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(4deg);
+  }
 }
 
 .card > p {
@@ -195,8 +326,20 @@ h2 {
 
 .primary {
   border: 0;
-  background: var(--primary);
+  background: var(--primary-fill);
   color: var(--primary-text);
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--primary) 60%, #000);
+  transition: transform 0.08s ease;
+}
+
+.primary:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--primary) 60%, #000);
+}
+
+:root[data-theme='football'] .primary {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .secondary {
@@ -293,19 +436,81 @@ legend {
   font-weight: 700;
 }
 
+/* The mascot runs along the bar towards the goal at the end. */
 .progress-track {
-  height: 10px;
+  position: relative;
+  height: 18px;
   border-radius: 999px;
-  background: var(--primary-soft);
-  overflow: hidden;
-  margin-top: -10px;
+  background: var(--progress-track);
+  margin: -4px 28px 0 0;
 }
 
-.progress-track span {
+.progress-fill {
   display: block;
   height: 100%;
-  background: var(--primary);
-  transition: width 0.2s ease;
+  border-radius: inherit;
+  background: var(--progress-fill);
+  transition: width 0.3s ease;
+}
+
+.progress-runner,
+.progress-goal {
+  position: absolute;
+  top: 50%;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.progress-runner {
+  transform: translate(-50%, -55%);
+  transition: left 0.3s ease;
+}
+
+:root[data-theme='unicorn'] .progress-runner {
+  /* Faces right, towards the rainbow. */
+  transform: translate(-50%, -55%) scaleX(-1);
+}
+
+:root[data-theme='football'] .progress-runner {
+  animation: roll 1.2s linear infinite;
+}
+
+@keyframes roll {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: 360deg;
+  }
+}
+
+.progress-goal {
+  right: -32px;
+  transform: translateY(-55%);
+}
+
+.correct-pop {
+  position: absolute;
+  top: 24%;
+  right: 5%;
+  font-size: 2.6rem;
+  pointer-events: none;
+  animation: pop 0.9s ease-out forwards;
+}
+
+@keyframes pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-20deg);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1.3) rotate(10deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-50px) scale(1) rotate(0deg);
+  }
 }
 
 .answer-form {
@@ -471,4 +676,115 @@ legend {
 
 .dialog-actions {
   justify-content: flex-end;
+}
+
+/* Results confetti */
+
+.results {
+  overflow: hidden;
+}
+
+.confetti {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.confetti span {
+  position: absolute;
+  top: -3rem;
+  opacity: 0;
+  animation-name: fall;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fall {
+  0% {
+    opacity: 0;
+    transform: translateY(0) rotate(0deg);
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(110vh) rotate(540deg);
+  }
+}
+
+/* Theme picker */
+
+.theme-picker {
+  text-align: center;
+}
+
+.theme-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 420px) {
+  .theme-options {
+    grid-template-columns: 1fr;
+  }
+}
+
+.theme-option {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 28px 16px;
+  border-radius: 24px;
+  border: 4px solid transparent;
+  transition: transform 0.15s ease;
+}
+
+.theme-option:hover {
+  transform: translateY(-4px) rotate(-1deg);
+}
+
+.theme-option-mascot {
+  font-size: 4rem;
+  line-height: 1;
+}
+
+.theme-option-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.theme-option-unicorn {
+  font-family: 'Fredoka', sans-serif;
+  color: #4a2a6b;
+  border-color: #ffd0ea;
+  background: linear-gradient(160deg, #ffd9ee, #eadcff 55%, #d7efff);
+}
+
+.theme-option-football {
+  font-family: 'Rubik', sans-serif;
+  color: #fff;
+  border-color: #13261a;
+  background: repeating-linear-gradient(90deg, #2f9e44 0 30px, #37b24d 30px 60px);
+  text-shadow: 0 2px 0 rgb(0 0 0 / 0.35);
+}
+
+.theme-option-football .theme-option-name {
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .confetti {
+    display: none;
+  }
 }
